@@ -1,0 +1,20 @@
+<arri>
+  <arriraw>
+    <shortsettings name="ARC" version="2">
+      <downscale>
+        <param name="mode" value="NATIVE_4448PX" />
+        <param name="anamorph" value="1.0" />
+        <param name="crispness" value="1.00" />
+      </downscale>
+      <input>
+        <param name="sequence" value="/Users/jgoldstone/tfe/Reference_frames/alexa_lf/webgate_20180205/res_and_color_charts_4448_x_3096/A003C001_180123_R191.0068700-0068700#######.ari" />
+      </input>
+      <output>
+        <param name="directory" value="/tmp" />
+        <param name="filename" value="ARC_CMD_output.#######" />
+        <param name="format" value="tiff" />
+        <param name="startnumber" value="-1" />
+      </output>
+    </shortsettings>
+  </arriraw>
+</arri>

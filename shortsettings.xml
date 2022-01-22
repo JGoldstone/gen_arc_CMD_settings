@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="Windows-1252" standalone="yes" ?>
+<arri>
+    <arriraw>
+        <!--
+            Within the shortsettings node, the ARC will be parameterised. As there is already metadata present in the ARRIRAW fileheader,
+            only insert values here, that shall be changed from filehader data and default values.
+        -->
+        <shortsettings name="ARC" version="2">
+            <whitebalance>
+                <param name="burntinred"            value="1.0" />       <!-- 0.0 to 4.0 value for WB already applied in camera. 0.0 if none. Present in fileheader if WB is applied in camera -->
+                <param name="burntingreen"          value="1.0" />       <!-- 0.0 to 4.0 value for WB already applied in camera. 0.0 if none. Present in fileheader if WB is applied in camera -->
+                <param name="burntinblue"           value="1.0" />       <!-- 0.0 to 4.0 value for WB already applied in camera. 0.0 if none. Present in fileheader if WB is applied in camera -->
+                <param name="desiredred"            value="1.0" />       <!-- 0.0 to 16.0 value for target WB. 0.0 if none. Present in fileheader -->
+                <param name="desiredgreen"          value="1.0" />       <!-- 0.0 to 16.0 value for target WB. 0.0 if none. Present in fileheader -->
+                <param name="desiredblue"           value="1.0" />       <!-- 0.0 to 16.0 value for target WB. 0.0 if none. Present in fileheader -->
+                <param name="WBappliedincamera"     value="false" />     <!-- true if WB is already applied in camera (D21), otherwise false -->
+                <param name="usecctandtint"         value="true" />      <!-- true if WB factors shall be computed from cct and tint, otherwise false -->
+            </whitebalance>
+            <colorhandling>
+                <param name="colorencodingrange"    value="fullRange" /> <!-- IGNORED for now. later also legal and extended -->
+                <param name="colorspace"            value="WideGamut" /> <!-- ITU709, P3, Video_ITU2020, Video_DCID60, Video_DCID65, Video_ITU2100_PQ, Video_ITU2100_HLG,
+                                                                              CameraNative, WideGamut, Film, 
+                                                                              LogC_Monochrome, Video_Monochrome, 
+                                                                              ACES, SceneLinear_WideGamut, SceneLinear_CameraNative -->
+                <param name="illumination"          value="planck" />    <!-- IGNORED for now. later also daylight, led, etc. -->
+                <param name="colorblending"         value="1.0" />       <!-- IGNORED for now. later between 0.0 and 1.0, now not used -->
+                <param name="cct"                   value="5600.0" />    <!-- correlated colour temperature, depending on camera 2000/3200 to 7000/11000. Present in fileheader -->
+                <param name="tint"                  value="0.0" />       <!-- -16.0 to 16.0. Present in fileheader -->
+                <param name="colorimetry"           value="ALEXA" />     <!-- Identifier for the colorimetric dataset (WB and matrix tables). Values: ALEXA, ALEXA65, ALEXA_LF, AMIRA, ALEXA_MINI. Present in fileheader -->
+            </colorhandling>
+            <asalut>
+                <param name="iso"                   value="400" />       <!-- 50 to 500/1600/3200 depending on camera. Present in fileheader -->
+            </asalut>
+            <downscale>
+                <param name="mode"                  value="TWO_K_FROM_2868PX" />     <!-- legal values: NATIVE_3414PX, NATIVE_2880PX, NATIVE_2868PX, NATIVE_2578PX, NATIVE_6560PX, NATIVE_5120PX, 
+                                                                                                        NATIVE_4320PX, NATIVE_3168PX, NATIVE_3424PX, NATIVE_2592PX, NATIVE_3200PX, NATIVE_1920PX, 
+                                                                                                        NATIVE_3840PX, NATIVE_4448PX, NATIVE_SCOPE_4448PX,
+                                                                                                        SD_FROM_2880PX,
+                                                                                                        HD_1_78_FROM_3414PX, HD_1_85_FROM_3414PX, HD_2_39_FROM_3414PX, 
+                                                                                                        HD_1_78_FROM_2880PX, HD_2_39_FROM_2880PX, HD_2_39_FROM_2578PX, HD_FROM_2880PX, HD_FROM_6560PX, 
+                                                                                                        HD_2_39_FROM_6560PX, HD_1_85_FROM_6560PX, HD_1_78_FROM_6560PX, HD_FROM_5120PX, 
+                                                                                                        HD_2_39_FROM_5120PX, HD_1_85_FROM_5120PX, HD_1_78_FROM_5120PX, HD_FROM_4320PX, 
+                                                                                                        HD_2_39_FROM_4320PX, HD_1_85_FROM_4320PX, HD_1_78_FROM_4320PX, HD_FROM_3840PX, 
+                                                                                                        HD_FROM_4448PX, HD_FROM_SCOPE_4448PX, HD_1_78_FROM_3840PX, HD_1_78_FROM_4448PX, HD_1_85_FROM_4448PX,
+                                                                                                        HD_2_39_FROM_4448PX, 
+                                                                                                        TWO_K_1_78_FROM_3414PX, TWO_K_DCI_1_85_FROM_3414PX, TWO_K_1_85_FROM_3414PX, TWO_K_2_39_FROM_3414PX, 
+                                                                                                        TWO_K_FROM_2880PX, TWO_K_FROM_2868PX, TWO_K_1_78_FROM_2880PX, TWO_K_1_78_FROM_2868PX,
+                                                                                                        TWO_K_2_39_FROM_2880PX, TWO_K_DCI_1_85_FROM_2880PX, TWO_K_2_39_FROM_2578PX, TWO_K_FROM_6560PX,
+                                                                                                        TWO_K_2_39_FROM_6560PX, TWO_K_1_85_FROM_6560PX, TWO_K_DCI_1_85_FROM_6560PX, TWO_K_1_78_FROM_6560PX, 
+                                                                                                        TWO_K_FROM_5120PX, TWO_K_2_39_FROM_5120PX, TWO_K_1_85_FROM_5120PX, TWO_K_DCI_1_85_FROM_5120PX, 
+                                                                                                        TWO_K_1_78_FROM_5120PX, TWO_K_FROM_4320PX, TWO_K_2_39_FROM_4320PX, TWO_K_1_85_FROM_4320PX, 
+                                                                                                        TWO_K_DCI_1_85_FROM_4320PX, TWO_K_1_78_FROM_4320PX, TWO_K_FROM_3168PX, TWO_K_FROM_3200PX,
+                                                                                                        TWO_K_FROM_3840PX, TWO_K_FROM_4448PX, TWO_K_1_78_FROM_3840PX, TWO_K_DCI_1_85_FROM_3840PX,
+                                                                                                        TWO_K_DCI_1_85_FROM_4448PX, TWO_K_2_39_FROM_3840PX, TWO_K_2_39_FROM_SCOPE_4448PX, TWO_K_2_39_FROM_4448PX,
+                                                                                                        QUAD_HD_1_85_FROM_3414PX, QUAD_HD_2_39_FROM_3414PX, QUAD_HD_2_39_FROM_2880PX, QUAD_HD_2_39_FROM_2578PX, 
+                                                                                                        QUAD_HD_FROM_2880PX, QUAD_HD_FROM_6560PX, QUAD_HD_2_39_FROM_6560PX, QUAD_HD_1_85_FROM_6560PX, 
+                                                                                                        QUAD_HD_1_78_FROM_6560PX, QUAD_HD_FROM_5120PX, QUAD_HD_2_39_FROM_5120PX, 
+                                                                                                        QUAD_HD_1_85_FROM_5120PX, QUAD_HD_1_78_FROM_5120PX, QUAD_HD_FROM_4320PX, 
+                                                                                                        QUAD_HD_2_39_FROM_4320PX, QUAD_HD_1_85_FROM_4320PX, QUAD_HD_1_78_FROM_4320PX,
+                                                                                                        QUAD_HD_FROM_3168PX, QUAD_HD_FROM_3200PX,
+                                                                                                        QUAD_HD_FROM_3840PX, QUAD_HD_FROM_4448PX, QUAD_HD_1_78_FROM_3840PX, QUAD_HD_1_78_FROM_4448PX,
+                                                                                                        QUAD_HD_1_85_FROM_4448PX, QUAD_HD_2_39_FROM_4448PX,
+                                                                                                        FOUR_K_DCI_1_78_FROM_3414PX, FOUR_K_1_78_FROM_3414PX, FOUR_K_DCI_1_85_FROM_3414PX, 
+                                                                                                        FOUR_K_1_85_FROM_3414PX, FOUR_K_2_39_FROM_3414PX, FOUR_K_DCI_1_78_FROM_2880PX, 
+                                                                                                        FOUR_K_DCI_1_85_FROM_2880PX, FOUR_K_2_39_FROM_2880PX, FOUR_K_2_39_FROM_2578PX, 
+                                                                                                        FOUR_K_FROM_2880PX, FOUR_K_FROM_6560PX, FOUR_K_2_39_FROM_6560PX, FOUR_K_1_85_FROM_6560PX, 
+                                                                                                        FOUR_K_DCI_1_85_FROM_6560PX, FOUR_K_1_78_FROM_6560PX, FOUR_K_FROM_5120PX, 
+                                                                                                        FOUR_K_2_39_FROM_5120PX, FOUR_K_1_85_FROM_5120PX, FOUR_K_DCI_1_85_FROM_5120PX, 
+                                                                                                        FOUR_K_1_78_FROM_5120PX, FOUR_K_FROM_4320PX, FOUR_K_2_39_FROM_4320PX, 
+                                                                                                        FOUR_K_1_85_FROM_4320PX, FOUR_K_DCI_1_85_FROM_4320PX, FOUR_K_1_78_FROM_4320PX, FOUR_K_FROM_3168PX,
+                                                                                                        FOUR_K_FROM_3200PX, FOUR_K_FROM_4448PX, FOUR_K_DCI_1_85_FROM_3840PX, FOUR_K_DCI_1_85_FROM_4448PX,
+                                                                                                        FOUR_K_2_39_FROM_3840PX, FOUR_K_2_39_FROM_SCOPE_4448PX, FOUR_K_2_39_FROM_4448PX -->
+                <param name="anamorph"              value="1.0" />       <!-- 1.0 for spherical footage, 1.25, 1.3, 1.33 and 2.0 for anamorph. Present in fileheader -->
+                <param name="crispness"             value="1.0" />       <!-- 0.0 to 3.0. Present in fileheader with int values from 0 and 300 -->
+            </downscale>
+            <camera>
+                <param name="cameratype"            value="ALEXA" />        <!-- ALEXA, D21, D20, ALEXA65, AMIRA, or ALEXA_MINI. Present in fileheader -->
+                <param name="inputContainer"        value="FullOpenGate" /> <!-- FullOpenGate, OpenGateWith4by3, OpenGateWith6by5, OpenGateWith8by9 or Classic16by9. 
+                                                                                 Via size of active image present in fileheader -->
+            </camera>
+            <orientation>
+                <param name="flip"                  value="none" />      <!-- none, horizontal, vertical, rotate. Present in fileheader -->
+            </orientation>
+            <quality>
+                <param name="mode"                  value="HQ" />        <!-- HQ, proxy2 (half size, very fast, colour not identical to HQ) or proxy1 (full size, simple debayer) -->
+                <param name="debayer"               value="ADA-5 SW" />  <!-- ADA-1 HW (identical to the debayering used in the camera), ADA-2 SW (even higher quality debayering, but also more ressource intensive), 
+                                                                              ADA-3 HW (new ARRI Debayering Algorithm, with again enhanced quality, optimised for use in hardware), 
+                                                                              ADA-3 SW (new ARRI Debayering Algorithm, with again enhanced quality)
+                                                                              ADA-5 HW (brand new ARRI Debayering Algorithm, with again enhanced quality, version optimised
+                                                                                        for use in hardware)
+                                                                              ADA-5 SW (brand new ARRI Debayering Algorithm, with again enhanced quality) -->
+                <param name="ada5finetuningred"     value="100" />       <!-- fine tuning parameter for ADA-5 SW red channel. Values from 0 to 100, default 100 -->
+                <param name="ada5finetuninggreen"   value="100" />       <!-- fine tuning parameter for ADA-5 SW green channel. Values from 0 to 100, default 100 -->
+                <param name="ada5finetuningblue"    value="50" />        <!-- fine tuning parameter for ADA-5 SW blue channel. Values from 0 to 100, default 50 -->
+                <param name="colourorder"           value="D21_ALEXA" /> <!-- colourorder, i.e. Bayer pattern D21_ALEXA default, present in newer file headers. Possible Values: D21_ALEXA, ALEXA65
+                                                                              GRBG, GBRG, BGGR and RGGB -->
+                <param name="denoise"               value="2.5" />       <!-- denoising, available with processing version 5.0 and higher. Indicates the denoising strength. Values possible
+                                                                              between 1.0 and 3.5. Default is 2.5, 0.0 indicates denoising is switched off. Present in fileheader -->
+            </quality>
+            <performance>
+                <param name="rendermode"            value="GPU" />       <!-- CPU or GPU. CPU means single- or multithreaded on the CPU, GPU on the graphics adapters processor. 
+                                                                              CUDA forces the use of CUDA on an appropriate NVIDIA GPU-->
+                <param name="processors"            value="16" />        <!-- number of cpu cores i.e number of parallel threads. In GPU rendermode only used for unpacking of image data -->
+            </performance>
+            <processing>
+                <param name="version"               value="4.0" />       <!-- color processing version. Present in fileheader -->
+            </processing>
+            <studio>
+                <param name="ND-filter"             value="0" />         <!-- ND filter type, if ND filter was used, 0 for no ND filter. Currently, type 1 is available for ALEXA Studio cameras, types 2, 3 and 4 are available for ALEXA Mini cameras-->
+            </studio>
+            <look>
+                <param name="printerlightsRed"      value="0.0" />          <!-- printer lights red value, range from -1.0 to 1.0 -->
+                <param name="printerlightsGreen"    value="0.0" />          <!-- printer lights green value, range from -1.0 to 1.0 -->
+                <param name="printerlightsBlue"     value="0.0" />          <!-- printer lights blue value, range from -1.0 to 1.0 -->
+                <param name="slopeRed"              value="1.0" />          <!-- CDL slope red value, range from 0.5 to 2.0 -->
+                <param name="slopeGreen"            value="1.0" />          <!-- CDL slope green value, range from 0.5 to 2.0 -->
+                <param name="slopeBlue"             value="1.0" />          <!-- CDL slope blue value, range from 0.5 to 2.0 -->
+                <param name="offsetRed"             value="0.0" />          <!-- CDL offset red value, range from -0.5 to 0.5 -->
+                <param name="offsetGreen"           value="0.0" />          <!-- CDL offset green value, range from -0.5 to 0.5 -->
+                <param name="offsetBlue"            value="0.0" />          <!-- CDL offset blue value, range from -0.5 to 0.5 -->
+                <param name="powerRed"              value="1.0" />          <!-- CDL power red value, range from 0.5 to 2.0 -->
+                <param name="powerGreen"            value="1.0" />          <!-- CDL power green value, range from 0.5 to 2.0 -->
+                <param name="powerBlue"             value="1.0" />          <!-- CDL power blue value, range from 0.5 to 2.0 -->
+                <param name="saturation"            value="1.0" />          <!-- saturation value, range from 0.0 to 2.0 -->
+                <param name="customLut"             value="false" />        <!-- flag, if custom LUT present in look data shall be used or not -->
+                <param name="lookFileName"          value="Metadata" />     <!-- Possible values: Metadata, Custom, None or a full path file name containing a look -->
+                <param name="lookMode"              value="Alexa Look" />   <!-- Possible values: Alexa Look, CDL LogC, CDL Video, None -->
+            </look>
+            <lookVideoParameters>                                           <!-- This node contains look information only available in the new Alexa SXT look, used in processing version 5.0-->
+                <param name="BlackGamma"            value="0.5" />          <!-- Tonemap parameter black gamma. Default is 0.5, range from 0.0 to 1.0 -->
+                <param name="Knee"                  value="0.5" />          <!-- Tonemap parameter knee. Default is 0.5, range from 0.0 to 1.0 -->
+                <param name="VideoGamma"            value="1.0" />          <!-- global video gamma. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="VideoSaturation"       value="1.0" />          <!-- video saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="RedSaturation"         value="1.0" />          <!-- red saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="YelSaturation"         value="1.0" />          <!-- yellow saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="GrnSaturation"         value="1.0" />          <!-- green saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="CynSaturation"         value="1.0" />          <!-- cyan saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="BluSaturation"         value="1.0" />          <!-- blue  saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="MagSaturation"         value="1.0" />          <!-- magenta saturation. Default is 1.0, range from 0.0 to 2.0 -->
+                <param name="RedVideoSlope"         value="1.0" />          <!-- red video slope. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="GrnVideoSlope"         value="1.0" />          <!-- green video slope. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="BluVideoSlope"         value="1.0" />          <!-- blue video slope. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="RedVideoGamma"         value="1.0" />          <!-- red video gamma. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="GrnVideoGamma"         value="1.0" />          <!-- green video gamma. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="BluVideoGamma"         value="1.0" />          <!-- blue video gamma. Default is 1.0, range from 0.5 to 2.0 -->
+                <param name="RedVideoPedestal"      value="0.0" />          <!-- red video pedestal. Default is 0.0, range from 0.0 to 1.0 -->
+                <param name="GrnVideoPedestal"      value="0.0" />          <!-- green video pedestal. Default is 0.0, range from 0.0 to 1.0 -->
+                <param name="BluVideoPedestal"      value="0.0" />          <!-- blue video pedestal. Default is 0.0, range from 0.0 to 1.0 -->
+            </lookVideoParameters>
+            <input>
+                <param name="sequence"              value="/media/Build/Images/OneFramePerShot/000000.ari" />   <!-- input sequence-->
+                <param name="mxfStartFrame"         value="0" />                                                <!-- for mxf input this is the zero-based index of the first frame to be rendered -->
+                <param name="mxfEndFrame"           value="0" />                                                <!-- for mxf input this is the zero-based index of the last frame to be rendered. -1 means rendering to the end of the clip -->
+            </input>
+            <output>
+                <param name="format"                value="dpx" />              <!-- jpeg, jpg, tiff, tif, cineon, dpx, dpx_16bit, dpx_16bit_bgr for video or logc encoding, exr, openexr for scenelinear encoding -->
+                <param name="exrcompression"        value="none" />             <!-- optional parameter for exr or openexr file output. Possible values according to openExr specification: none, rle,
+                                                                                     zips, zip, piz, pxr24, b44, b44a -->
+                <param name="directory"             value="./$resolution" />    <!-- variables as in ARC GUI (except for $globaldir) -->
+                <param name="filename"              value="$inputfile###" />    <!-- variables as in ARC GUI -->
+                <param name="startnumber"           value="-1" />               <!-- -1 = as-source (only supported when using <input>), or integer >= 0 -->
+            </output>
+        </shortsettings>
+    </arriraw>
+</arri>
